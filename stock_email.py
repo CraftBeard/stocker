@@ -40,19 +40,16 @@ def send_email():
     csv = MIMEApplication(csv_data, name="stocks_data.csv")
     msg.attach(csv)
 
-    # create server
-    server = smtplib.SMTP('smtp.qq.com', 465)
-
-    # start TLS for security
-    server.starttls()
-
-    # Login
-    server.login(msg['From'], password)
-
-    # send the message via the server.
-    server.sendmail(msg['From'], msg['To'], msg.as_string())
-
-    # Terminate the SMTP session and close the connection
-    server.quit()
+    result=True
+    try:
+        server=smtplib.SMTP_SSL("smtp.qq.com",465)  # smtp server & port
+        server.ehlo() # open connection
+        server.login(msg['From'],password) # login
+        server.sendmail(msg['From'],msg['To'],msg.as_string()) # send email
+        server.quit() # close connection
+    except Exception as e:
+        result=False
+        print(e)
+    return result
 
 send_email()
