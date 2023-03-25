@@ -43,21 +43,19 @@ for i, code in enumerate(unique_codes):
     axs[i].plot(date_values, close_values, color='blue')
     axs[i].set_title(f"{code} - {code_name}", fontproperties=font)
 
-    # Annotate 3-month lowest close
+    # Get dates of lowest_close
     lowest_close_3m = min(close_values[date_values >= pd.Timestamp('now') - pd.Timedelta(days=90)])
-    axs[i].annotate(f"3-month lowest close: {lowest_close_3m}", xy=(date_values.iloc[-1], lowest_close_3m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_3m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
-
-    # Annotate 6-month lowest close
+    date_3m = date_values[close_values == lowest_close_3m].iloc[0]
     lowest_close_6m = min(close_values[date_values >= pd.Timestamp('now') - pd.Timedelta(days=180)])
-    axs[i].annotate(f"6-month lowest close: {lowest_close_6m}", xy=(date_values.iloc[-1], lowest_close_6m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_6m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
-
-    # Annotate 12-month lowest close
+    date_6m = date_values[close_values == lowest_close_6m].iloc[0]
     lowest_close_12m = min(close_values[date_values >= pd.Timestamp('now') - pd.Timedelta(days=365)])
-    axs[i].annotate(f"12-month lowest close: {lowest_close_12m}", xy=(date_values.iloc[-1], lowest_close_12m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_12m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
-
-    # Annotate 24-month lowest close
+    date_12m = date_values[close_values == lowest_close_12m].iloc[0]
     lowest_close_24m = min(close_values)
-    axs[i].annotate(f"24-month lowest close: {lowest_close_24m}", xy=(date_values.iloc[-1], lowest_close_24m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_24m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
+    date_24m = date_values[close_values == lowest_close_24m].iloc[0]
+    axs[i].annotate(f"3-month lowest close: {lowest_close_3m} ({date_3m})", xy=(date_3m, lowest_close_3m), xytext=(date_3m+pd.Timedelta(days=30), lowest_close_3m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
+    axs[i].annotate(f"6-month lowest close: {lowest_close_6m} ({date_6m})", xy=(date_6m, lowest_close_6m), xytext=(date_6m+pd.Timedelta(days=30), lowest_close_6m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
+    axs[i].annotate(f"12-month lowest close: {lowest_close_12m} ({date_12m})", xy=(date_12m, lowest_close_12m), xytext=(date_12m+pd.Timedelta(days=30), lowest_close_12m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
+    axs[i].annotate(f"24-month lowest close: {lowest_close_24m} ({date_24m})", xy=(date_24m, lowest_close_24m), xytext=(date_24m+pd.Timedelta(days=30), lowest_close_24m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
 
 # Save the plot
 plt.savefig(f"stocks.png")
