@@ -12,10 +12,10 @@ mydb = pymysql.connect(
 )
 
 # Read stock prices data from the database
-stocks_data = pd.read_sql("SELECT date, code, high, low, close FROM stock_prices WHERE date >= DATE_SUB(NOW(), INTERVAL 24 MONTH)", con=mydb)
+stocks_data = pd.read_sql("SELECT DISTINCT date, code, high, low, close FROM stock_prices WHERE date >= DATE_SUB(NOW(), INTERVAL 24 MONTH)", con=mydb)
 
 # Read stock codes data from the database
-codes = pd.read_sql("SELECT code, code_name FROM stock_codes", con=mydb)
+codes = pd.read_sql("SELECT DISTINCT code, code_name FROM stock_codes", con=mydb)
 
 # Merge stock prices and stock codes data
 stocks_data = pd.merge(stocks_data, codes, on='code', how='left')
