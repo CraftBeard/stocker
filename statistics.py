@@ -21,7 +21,7 @@ stocks_data = pd.merge(stocks_data, codes, on='code', how='left')
 unique_codes = stocks_data['code'].unique()
 
 # Set Chinese font
-font = FontProperties(fname='/System/Library/Fonts/PingFang.ttc')
+font = FontProperties(fname='fonts/MSYH.TTC')
 
 fig, axs = plt.subplots(len(unique_codes), 1, figsize=(10, 30)) # changed figsize to leave more distance between subplots
 
