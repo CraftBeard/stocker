@@ -2,9 +2,13 @@ import baostock as bs
 import pymysql
 
 
-cnx = pymysql.connect(user='stocker', password='2016@uq$tencent',
-                               host='localhost',
-                               database='stocker')
+cnx = pymysql.connect(
+  host="localhost",
+  user="stocker",
+  password="2016@uq$tencent",
+  database="stock"
+)
+
 cursor = cnx.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS stock_codes (
