@@ -1,6 +1,12 @@
 import baostock as bs
 import pymysql
+import sys
+import datetime
 
+if len(sys.argv) > 1:
+    input_day = sys.argv[1]
+else:
+    input_day = datetime.datetime.today().strftime('%Y-%m-%d')
 
 cnx = pymysql.connect(
   host="localhost",
@@ -17,14 +23,14 @@ cursor.execute("""
         code_name VARCHAR(100)
     )
 """)
-cursor.execute("TRUNCATE TABLE stock_codes")
 lg = bs.login()
-rs = bs.query_all_stock()
+rs = bs.query_all_stock(day=input_day)
 while (rs.error_code == '0') & rs.next():
     data = rs.get_row_data()
     cursor.execute("""
         INSERT INTO stock_codes (code, tradestatus, code_name) 
         VALUES (%s, %s, %s) 
+        ON DUPLICATE KEY UPDATE tradestatus=VALUES(tradestatus), code_name=VALUES(code_name)
     """, (data[0], data[1], data[2]))
 cnx.commit()
 cursor.close()
