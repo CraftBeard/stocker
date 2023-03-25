@@ -6,3 +6,5 @@ select
 from stock_prices
 group by date, code
 order by code, date;
+
+select min(date), count(1), count(*) from stock.stock_prices;
