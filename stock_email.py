@@ -10,7 +10,7 @@ def send_email():
 
     # setup the parameters of the message
     password = "qlgfqeimqrjrbheb"
-    msg['From'] = "lianglx_alex@foxmail.com"
+    msg['From'] = "515205935@qq.com"
     msg['To'] = "lianglx.alex@gmail.com"
     msg['Subject'] = "Stock Data"
 
