@@ -1,9 +1,9 @@
-import mysql.connector
+import pymysql
 import pandas as pd
 import matplotlib.pyplot as plt
 
 # Connect to MySQL database
-mydb = mysql.connector.connect(
+mydb = pymysql.connect(
   host="localhost",
   user="stocker",
   password="2016@uq$tencent",
