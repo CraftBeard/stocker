@@ -39,46 +39,46 @@ for stock in stocks:
 
     # insert data into mysql
     for index, row in result.iterrows():
-        if row.isnull().values.any():
-            continue
-        sql = f"""
-        INSERT IGNORE INTO stock_prices (
-            date, 
-            code, 
-            open, 
-            high, 
-            low, 
-            close, 
-            volume, 
-            amount, 
-            preclose, 
-            adjustflag, 
-            turn, 
-            tradestatus, 
-            pctChg, 
-            isST
-        ) VALUES (
-            '{str(row['date'])}', 
-            '{str(row['code'])}', 
-            {float(row['open'].strip())}, 
-            {float(row['high'].strip())}, 
-            {float(row['low'].strip())}, 
-            {float(row['close'].strip())}, 
-            {float(row['volume'].strip())}, 
-            {float(row['amount'].strip())}, 
-            {float(row['preclose'].strip())}, 
-            {int(row['adjustflag'].strip())}, 
-            {float(row['turn'].strip())}, 
-            {int(row['tradestatus'].strip())}, 
-            {float(row['pctChg'].strip())}, 
-            {int(row['isST'].strip())}
-        )
-        """
         try:
+            if row.isnull().values.any():
+                continue
+            sql = f"""
+            INSERT IGNORE INTO stock_prices (
+                date, 
+                code, 
+                open, 
+                high, 
+                low, 
+                close, 
+                volume, 
+                amount, 
+                preclose, 
+                adjustflag, 
+                turn, 
+                tradestatus, 
+                pctChg, 
+                isST
+            ) VALUES (
+                '{str(row['date'])}', 
+                '{str(row['code'])}', 
+                {float(row['open'].strip())}, 
+                {float(row['high'].strip())}, 
+                {float(row['low'].strip())}, 
+                {float(row['close'].strip())}, 
+                {float(row['volume'].strip())}, 
+                {float(row['amount'].strip())}, 
+                {float(row['preclose'].strip())}, 
+                {int(row['adjustflag'].strip())}, 
+                {float(row['turn'].strip())}, 
+                {int(row['tradestatus'].strip())}, 
+                {float(row['pctChg'].strip())}, 
+                {int(row['isST'].strip())}
+            )
+            """
             cursor.execute(sql)
         except Exception as e:
+            print(f"Error occurred while inserting data into mysql: {e}")
             print(row)
-            print(e)
 conn.commit()
 
 # logout from baostock and mysql
