@@ -58,20 +58,20 @@ for stock in stocks:
             pctChg, 
             isST
         ) VALUES (
-            '{row['date']}', 
-            '{row['code']}', 
-            {row['open']}, 
-            {row['high']}, 
-            {row['low']}, 
-            {row['close']}, 
-            {row['volume']}, 
-            {row['amount']}, 
-            {row['preclose']}, 
-            {row['adjustflag']}, 
-            {row['turn']}, 
-            {row['tradestatus']}, 
-            {row['pctChg']}, 
-            {row['isST']}
+            '{str(row['date'])}', 
+            '{str(row['code'])}', 
+            {float(row['open'])}, 
+            {float(row['high'])}, 
+            {float(row['low'])}, 
+            {float(row['close'])}, 
+            {float(row['volume'])}, 
+            {float(row['amount'])}, 
+            {float(row['preclose'])}, 
+            {int(row['adjustflag'])}, 
+            {float(row['turn'])}, 
+            {int(row['tradestatus'])}, 
+            {float(row['pctChg'])}, 
+            {int(row['isST'])}
         )
         """
         try:
