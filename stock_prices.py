@@ -74,7 +74,11 @@ for stock in stocks:
             {row['isST']}
         )
         """
-        cursor.execute(sql)
+        try:
+            cursor.execute(sql)
+        except Exception as e:
+            print(row)
+            print(e)
 conn.commit()
 
 # logout from baostock and mysql
