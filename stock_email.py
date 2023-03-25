@@ -41,7 +41,7 @@ def send_email():
     msg.attach(csv)
 
     # create server
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server = smtplib.SMTP('smtp.qq.com', 465)
 
     # start TLS for security
     server.starttls()
