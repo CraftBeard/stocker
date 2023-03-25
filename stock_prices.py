@@ -61,18 +61,18 @@ for stock in stocks:
             ) VALUES (
                 '{str(row['date'])}', 
                 '{str(row['code'])}', 
-                {float(row['open'].strip())}, 
-                {float(row['high'].strip())}, 
-                {float(row['low'].strip())}, 
-                {float(row['close'].strip())}, 
-                {float(row['volume'].strip())}, 
-                {float(row['amount'].strip())}, 
-                {float(row['preclose'].strip())}, 
-                {int(row['adjustflag'].strip())}, 
-                {float(row['turn'].strip())}, 
-                {int(row['tradestatus'].strip())}, 
-                {float(row['pctChg'].strip())}, 
-                {int(row['isST'].strip())}
+                {float(row['open'].strip()) if row['open'].strip() != '' else 0}, 
+                {float(row['high'].strip()) if row['high'].strip() != '' else 0}, 
+                {float(row['low'].strip()) if row['low'].strip() != '' else 0}, 
+                {float(row['close'].strip()) if row['close'].strip() != '' else 0}, 
+                {float(row['volume'].strip()) if row['volume'].strip() != '' else 0}, 
+                {float(row['amount'].strip()) if row['amount'].strip() != '' else 0}, 
+                {float(row['preclose'].strip()) if row['preclose'].strip() != '' else 0}, 
+                {int(row['adjustflag'].strip()) if row['adjustflag'].strip() != '' else 0}, 
+                {float(row['turn'].strip()) if row['turn'].strip() != '' else 0}, 
+                {int(row['tradestatus'].strip()) if row['tradestatus'].strip() != '' else 0}, 
+                {float(row['pctChg'].strip()) if row['pctChg'].strip() != '' else 0}, 
+                {int(row['isST'].strip()) if row['isST'].strip() != '' else 0}
             )
             """
             cursor.execute(sql)
