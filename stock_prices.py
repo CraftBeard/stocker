@@ -31,7 +31,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS stock_prices (
 # get stock data from baostock
 lg = bs.login()
 for stock in stocks:
-    rs = bs.query_history_k_data_plus(stock, start_date=sys.argv[1], end_date=sys.argv[2], frequency="d", adjustflag="3")
+    rs = bs.query_history_k_data_plus(stock, "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST", start_date=sys.argv[1], end_date=sys.argv[2], frequency="d", adjustflag="3")
     data_list = []
     while (rs.error_code == '0') & rs.next():
         data_list.append(rs.get_row_data())
