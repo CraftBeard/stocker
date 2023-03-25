@@ -39,6 +39,8 @@ for stock in stocks:
 
     # insert data into mysql
     for index, row in result.iterrows():
+        if row.isnull().values.any():
+            continue
         sql = f"""
         INSERT IGNORE INTO stock_prices (
             date, 
