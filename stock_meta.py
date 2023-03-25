@@ -20,12 +20,12 @@ cursor.execute("""
 lg = bs.login()
 rs = bs.query_all_stock()
 while (rs.error_code == '0') & rs.next():
-    stock_data = rs.get_row_data()
+    data = rs.get_row_data()
     cursor.execute("""
         INSERT INTO stock_codes (code, tradestatus, code_name) 
-        VALUES (%s) 
+        VALUES (%s, %s, %s) 
         ON DUPLICATE KEY UPDATE code=code
-    """, (stock_data))
+    """, (data[0], data[1], data[2]))
 cnx.commit()
 cursor.close()
 cnx.close()
