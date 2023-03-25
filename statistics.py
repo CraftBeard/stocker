@@ -56,6 +56,7 @@ for i, code in enumerate(unique_codes):
     axs[i].annotate(f"6-month lowest close: {lowest_close_6m} ({date_6m})", xy=(date_6m, lowest_close_6m), xytext=(date_6m+pd.Timedelta(days=30), lowest_close_6m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
     axs[i].annotate(f"12-month lowest close: {lowest_close_12m} ({date_12m})", xy=(date_12m, lowest_close_12m), xytext=(date_12m+pd.Timedelta(days=30), lowest_close_12m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
     axs[i].annotate(f"24-month lowest close: {lowest_close_24m} ({date_24m})", xy=(date_24m, lowest_close_24m), xytext=(date_24m+pd.Timedelta(days=30), lowest_close_24m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font)
+    fig.tight_layout()
 
 # Save the plot
 plt.savefig(f"stocks.png")
