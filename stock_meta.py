@@ -1,8 +1,8 @@
 import baostock as bs
-import mysql.connector
+import pymysql
 
 
-cnx = mysql.connector.connect(user='stocker', password='2016@uq$tencent',
+cnx = pymysql.connect(user='stocker', password='2016@uq$tencent',
                                host='localhost',
                                database='stocker')
 cursor = cnx.cursor()
