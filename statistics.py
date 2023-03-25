@@ -15,7 +15,7 @@ data = pd.read_sql("SELECT date, code, high, low, close FROM stock_prices WHERE 
 
 unique_codes = data['code'].unique()
 
-fig, axs = plt.subplots(len(unique_codes), 1, figsize=(10, 20))
+fig, axs = plt.subplots(len(unique_codes), 1, figsize=(10, 30)) # changed figsize to leave more distance between subplots
 
 for i, code in enumerate(unique_codes):
     code_data = data[data['code'] == code]
