@@ -41,16 +41,16 @@ for i, code in enumerate(unique_codes):
 
     # Add tags to lowest close values
     lowest_close_3m = min(close_values[date_values >= pd.Timestamp('now') - pd.Timedelta(days=90)])
-    axs[i].text(date_values.iloc[-1], lowest_close_3m, f"3-month lowest close: {lowest_close_3m}", fontsize=8, color='blue', fontproperties=font) # Set Chinese font
+    axs[i].annotate(f"3-month lowest close: {lowest_close_3m}", xy=(date_values.iloc[-1], lowest_close_3m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_3m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font) # Set Chinese font
 
     lowest_close_6m = min(close_values[date_values >= pd.Timestamp('now') - pd.Timedelta(days=180)])
-    axs[i].text(date_values.iloc[-1], lowest_close_6m, f"6-month lowest close: {lowest_close_6m}", fontsize=8, color='blue', fontproperties=font) # Set Chinese font
+    axs[i].annotate(f"6-month lowest close: {lowest_close_6m}", xy=(date_values.iloc[-1], lowest_close_6m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_6m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font) # Set Chinese font
 
     lowest_close_12m = min(close_values[date_values >= pd.Timestamp('now') - pd.Timedelta(days=365)])
-    axs[i].text(date_values.iloc[-1], lowest_close_12m, f"12-month lowest close: {lowest_close_12m}", fontsize=8, color='blue', fontproperties=font) # Set Chinese font
+    axs[i].annotate(f"12-month lowest close: {lowest_close_12m}", xy=(date_values.iloc[-1], lowest_close_12m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_12m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font) # Set Chinese font
 
     lowest_close_24m = min(close_values)
-    axs[i].text(date_values.iloc[-1], lowest_close_24m, f"24-month lowest close: {lowest_close_24m}", fontsize=8, color='blue', fontproperties=font) # Set Chinese font
+    axs[i].annotate(f"24-month lowest close: {lowest_close_24m}", xy=(date_values.iloc[-1], lowest_close_24m), xytext=(date_values.iloc[-1]+pd.Timedelta(days=30), lowest_close_24m+5), arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='blue', fontproperties=font) # Set Chinese font
 
 plt.savefig(f"stocks.png")
 plt.clf()
