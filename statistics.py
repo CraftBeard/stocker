@@ -32,7 +32,7 @@ fig, axs = plt.subplots(len(unique_codes), 1, figsize=(10, 30))
 # Plot stock prices for each unique code
 for i, code in enumerate(unique_codes):
     code_data = stocks_data[stocks_data['code'] == code]
-    code_name = code_data['code_name']
+    code_name = code_data['code_name'].iloc[0]
     date_values = code_data['date']
     close_values = code_data['close']
     high_values = code_data['high']
