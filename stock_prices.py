@@ -60,18 +60,18 @@ for stock in stocks:
         ) VALUES (
             '{str(row['date'])}', 
             '{str(row['code'])}', 
-            {float(row['open'])}, 
-            {float(row['high'])}, 
-            {float(row['low'])}, 
-            {float(row['close'])}, 
-            {float(row['volume'])}, 
-            {float(row['amount'])}, 
-            {float(row['preclose'])}, 
-            {int(row['adjustflag'])}, 
-            {float(row['turn'])}, 
-            {int(row['tradestatus'])}, 
-            {float(row['pctChg'])}, 
-            {int(row['isST'])}
+            {float(row['open'].strip())}, 
+            {float(row['high'].strip())}, 
+            {float(row['low'].strip())}, 
+            {float(row['close'].strip())}, 
+            {float(row['volume'].strip())}, 
+            {float(row['amount'].strip())}, 
+            {float(row['preclose'].strip())}, 
+            {int(row['adjustflag'].strip())}, 
+            {float(row['turn'].strip())}, 
+            {int(row['tradestatus'].strip())}, 
+            {float(row['pctChg'].strip())}, 
+            {int(row['isST'].strip())}
         )
         """
         try:
