@@ -37,11 +37,23 @@ def send_email():
       <body>
         <p>Hi!</P>
         <p>Sent on: {}</p>
-        <p>{}</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Price</th>
+              <th>Change</th>
+              <th>% Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {}
+          </tbody>
+        </table>
         <img src="cid:image1">
       </body>
     </html>
-    """.format(today, csv_data)
+    """.format(today, csv_data.replace('\n', '').replace(',', '</td><td>').replace('\r', '').replace('<td></td>', ''))
     body = MIMEText(html, 'html')
     msg.attach(body)
 
