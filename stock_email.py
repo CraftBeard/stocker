@@ -5,6 +5,7 @@ from email.mime.image import MIMEImage
 from email.mime.application import MIMEApplication
 import stock_config as sc
 import datetime
+import pandas as pd
 
 email_config = sc.EMAIL_CONFIG
 
@@ -25,12 +26,15 @@ def send_email():
         img_data = f.read()
     image = MIMEImage(img_data, name="stocks.png")
     image.add_header('Content-ID', '<image1>')
-    # msg.attach(image)
+    msg.attach(image)
 
     # add html email body
     today = datetime.date.today().strftime("%Y-%m-%d")
-    with open("stock_values.csv", 'r') as f:
-        stock_values = f.read()
+    stock_values = pd.read_csv('stock_values.csv')
+    column_names = list(stock_values.columns)
+    column_names_html = ""
+    for name in column_names:
+        column_names_html += "<th>{}</th>".format(name)
     html = """
     <html>
       <head></head>
@@ -38,45 +42,19 @@ def send_email():
         <p>Hi!</P>
         <p>Sent on: {}</p>
         <table>
-          <thead>
-            <tr>
-              <th>证券代码</th>
-              <th>证券名称</th>
-              <th>最新收盘价</th>
-              <th>跳楼度(越低越好)</th>
-              <th>近3m最低价</th>
-              <th>近3m最低价日期</th>
-              <th>近6m最低价</th>
-              <th>近6m最低价日期</th>
-              <th>近12m最低价</th>
-              <th>近12m最低价日期</th>
-              <th>近24m最低价</th>
-              <th>近24m最低价日期</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for stock in stock_values.itertuples() %}
-            <tr>
-              <td>{{ stock[1] }}</td>
-              <td>{{ stock[2] }}</td>
-              <td>{{ stock[3] }}</td>
-              <td>{{ stock[4] }}</td>
-              <td>{{ stock[5] }}</td>
-              <td>{{ stock[6] }}</td>
-              <td>{{ stock[7] }}</td>
-              <td>{{ stock[8] }}</td>
-              <td>{{ stock[9] }}</td>
-              <td>{{ stock[10] }}</td>
-              <td>{{ stock[11] }}</td>
-              <td>{{ stock[12] }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
+            <thead>
+                <tr>
+                    {}
+                </tr>
+            </thead>
+            <tbody>
+                {}
+            </tbody>
         </table>
         <img src="cid:image1">
       </body>
     </html>
-    """.format(today, stock_values))
+    """.format(today, column_names_html, stock_values.to_html(index=False))
     body = MIMEText(html, 'html')
     msg.attach(body)
 
