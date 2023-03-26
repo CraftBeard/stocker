@@ -3,10 +3,9 @@
 
 DB_CONFIG = {
     'user': 'stocker',
-    'password': '2016@uq@tencent',
+    'password': '2016@uq$tencent',
     'host': 'localhost',
-    'database': 'stock',
-    'timeout': 300
+    'database': 'stock'
 }
 
 EMAIL_CONFIG = {
