@@ -45,7 +45,7 @@ def send_email():
         <img src="cid:image1">
       </body>
     </html>
-    """.format(today, stock_values.to_html(index=False, border=1, style="border-collapse: collapse;"))
+    """.format(today, stock_values.to_html(index=False, border=1))
     body = MIMEText(html, 'html')
     msg.attach(body)
 
