@@ -34,16 +34,9 @@ def send_email():
     html = """
     <html>
       <head>
-        <style type="text/css">
-table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 1px;
-            text-align: left;
-          }
-th {
-                background-color: #f2f2f2;
-              }
+        <style> 
+            table, th, td {{ border: 1px solid black; border-collapse: collapse; }}
+            th, td {{ padding: 5px; }}
         </style>
       </head>
       <body>
