@@ -15,7 +15,7 @@ def send_email():
     # setup the parameters of the message
     password = email_config['password']
     msg['From'] = email_config['from']
-    msg['To'] = email_config['to']
+    msg['To'] = ", ".join(email_config['to'])
     msg['Subject'] = email_config['subject']
     smtp_server = email_config['smtp_server']
     smtp_port = email_config['smtp_port']
