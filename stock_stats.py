@@ -5,12 +5,14 @@ from matplotlib.font_manager import FontProperties
 import stock_config as sc
 
 db_config = sc.DB_CONFIG
+stock_config = sc.STOCK_CONFIG
 
 # Connect to the database
 mydb = pymysql.connect(host=db_config['host'], user=db_config['user'], password=db_config['password'], database=db_config['database'])
 
 # Read stock prices data from the database
-stocks_data = pd.read_sql("SELECT DISTINCT date, code, high, low, close FROM stock_prices WHERE date >= DATE_SUB(NOW(), INTERVAL 24 MONTH)", con=mydb)
+stocks_data = pd.read_sql(f"SELECT DISTINCT date, code, high, low, close FROM stock_prices WHERE date >= DATE_SUB(NOW(), INTERVAL 24 MONTH) AND code in {tuple(stock_config['stocks'])}", con=mydb)
+
 
 # Read stock codes data from the database
 codes = pd.read_sql("SELECT DISTINCT code, code_name FROM stock_codes", con=mydb)
