@@ -36,7 +36,7 @@ def send_email():
       <head>
         <style> 
             table, th, td {{ border: 1px solid black; border-collapse: collapse; }}
-            th, td {{ padding: 0px; }}
+            th, td {{ padding: 2px; }}
         </style>
       </head>
       <body>
