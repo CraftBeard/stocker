@@ -30,7 +30,7 @@ def send_email():
     # add html email body
     today = datetime.date.today().strftime("%Y-%m-%d")
     with open("stock_values.csv", 'r') as f:
-        csv_data = f.read()
+        stock_values = f.read()
     html = """
     <html>
       <head></head>
@@ -40,20 +40,43 @@ def send_email():
         <table>
           <thead>
             <tr>
-              <th>Symbol</th>
-              <th>Price</th>
-              <th>Change</th>
-              <th>% Change</th>
+              <th>证券代码</th>
+              <th>证券名称</th>
+              <th>最新收盘价</th>
+              <th>跳楼度(越低越好)</th>
+              <th>近3m最低价</th>
+              <th>近3m最低价日期</th>
+              <th>近6m最低价</th>
+              <th>近6m最低价日期</th>
+              <th>近12m最低价</th>
+              <th>近12m最低价日期</th>
+              <th>近24m最低价</th>
+              <th>近24m最低价日期</th>
             </tr>
           </thead>
           <tbody>
-            {}
+            {% for stock in stock_values.itertuples() %}
+            <tr>
+              <td>{{ stock[1] }}</td>
+              <td>{{ stock[2] }}</td>
+              <td>{{ stock[3] }}</td>
+              <td>{{ stock[4] }}</td>
+              <td>{{ stock[5] }}</td>
+              <td>{{ stock[6] }}</td>
+              <td>{{ stock[7] }}</td>
+              <td>{{ stock[8] }}</td>
+              <td>{{ stock[9] }}</td>
+              <td>{{ stock[10] }}</td>
+              <td>{{ stock[11] }}</td>
+              <td>{{ stock[12] }}</td>
+            </tr>
+            {% endfor %}
           </tbody>
         </table>
         <img src="cid:image1">
       </body>
     </html>
-    """.format(today, csv_data.replace('\n', '').replace(',', '</td><td>').replace('\r', '').replace('<td></td>', ''))
+    """.format(today, stock_values))
     body = MIMEText(html, 'html')
     msg.attach(body)
 
