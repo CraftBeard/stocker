@@ -31,17 +31,13 @@ def send_email():
     # add html email body
     today = datetime.date.today().strftime("%Y-%m-%d")
     stock_values = pd.read_csv('stock_values.csv')
-    column_names = list(stock_values.columns)
-    column_names_html = ""
-    for name in column_names:
-        column_names_html += "<th>{}</th>".format(name)
     html = """
     <html>
       <head></head>
       <body>
         <p>Hi!</P>
         <p>Sent on: {}</p>
-        <table style="border-collapse: collapse;">
+        <table style='border: 1px solid black; border-collapse: collapse;'>
             <tbody>
                 {}
             </tbody>
@@ -49,7 +45,7 @@ def send_email():
         <img src="cid:image1">
       </body>
     </html>
-    """.format(today, stock_values.to_html(index=False, border=1))
+    """.format(today, stock_values.to_html(index=False, border=1, style="border-collapse: collapse;"))
     body = MIMEText(html, 'html')
     msg.attach(body)
 
