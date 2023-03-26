@@ -5,9 +5,10 @@ import sys
 import stock_config as sc
 
 stocks = sc.STOCK_CONFIG['stocks']
+db_config = sc.DB_CONFIG
 
 # login to mysql
-conn = pymysql.connect(host='localhost', user='stocker', password='2016@uq$tencent', database='stock')
+conn = pymysql.connect(host=db_config['host'], user=db_config['user'], password=db_config['password'], database=db_config['database'])
 
 # create mysql table if not exists
 cursor = conn.cursor()
