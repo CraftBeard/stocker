@@ -33,7 +33,19 @@ def send_email():
     stock_values = pd.read_csv('stock_values.csv')
     html = """
     <html>
-      <head></head>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 1px;
+            text-align: left;
+          }
+          th {
+            background-color: #f2f2f2;
+          }
+        </style>
+      </head>
       <body>
         <p>Hi!</P>
         <p>Sent on: {}</p>
@@ -45,25 +57,6 @@ def send_email():
         <img src="cid:image1">
       </body>
     </html>
-
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            text-align: left;
-            padding: 8px;
-            border: 1px solid black;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
 
     """.format(today, stock_values.to_html(index=False))
     body = MIMEText(html, 'html')
