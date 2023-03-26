@@ -2,8 +2,9 @@ import baostock as bs
 import pandas as pd
 import pymysql
 import sys
+import stock_config as sc
 
-stocks = ["sh.600036", "sh.601012", "sz.002594", "sh.688598", "sh.300001", "sh.600519", "sh.600389", "sz.300316"]
+stocks = sc.STOCK_CONFIG['stocks']
 
 # login to mysql
 conn = pymysql.connect(host='localhost', user='stocker', password='2016@uq$tencent', database='stock')
@@ -31,7 +32,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS stock_prices (
 # get stock data from baostock
 lg = bs.login()
 for stock in stocks:
-    rs = bs.query_history_k_data_plus(stock, "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST", start_date=sys.argv[1], end_date=sys.argv[2], frequency="d", adjustflag="3")
+    rs = bs.query_history_k_data_plus(stock, 'date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST', start_date=sys.argv[1], end_date=sys.argv[2], frequency='d', adjustflag='3')
     data_list = []
     while (rs.error_code == '0') & rs.next():
         data_list.append(rs.get_row_data())
@@ -85,4 +86,3 @@ conn.commit()
 bs.logout()
 cursor.close()
 conn.close()
-
