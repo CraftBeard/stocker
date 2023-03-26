@@ -23,7 +23,7 @@ def send_email():
     # attach the image to the message
     with open("stocks.png", 'rb') as f:
         img_data = f.read()
-    image = MIMEImage(img_data, name="stocks_data.png")
+    image = MIMEImage(img_data, name="stocks.png")
     image.add_header('Content-ID', '<image1>')
     # msg.attach(image)
 
