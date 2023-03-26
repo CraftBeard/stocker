@@ -35,17 +35,15 @@ def send_email():
     <html>
       <head>
         <style type="text/css">
-            table, th, td {
-              border: 1px solid black;
-              border-collapse: collapse;
-              padding: 1px;
-              text-align: left;
-            }
+table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 1px;
+            text-align: left;
           }
-            th {
-              background-color: #f2f2f2;
-            }
-          }
+th {
+                background-color: #f2f2f2;
+              }
         </style>
       </head>
       <body>
