@@ -28,7 +28,7 @@ font = FontProperties(fname='fonts/MSYH.TTC')
 fig, axs = plt.subplots(len(unique_codes), 1, figsize=(10, 30))
 
 # Plot stock prices for each unique code
-stock_values = []
+stock_values_list = []
 for i, code in enumerate(unique_codes):
     code_data = stocks_data[stocks_data['code'] == code]
     code_name = code_data['code_name'].iloc[0]
@@ -59,7 +59,7 @@ for i, code in enumerate(unique_codes):
     axs[i].annotate(f"24m lowest: {lowest_close_24m} ({date_24m})", xy=(date_24m, lowest_close_24m), xytext=(-20,-20), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='purple', fontproperties=font)
     fig.tight_layout()
 
-    stock_values.append({
+    stock_values_list.append({
         '证券代码': code,
         '证券名称': code_name,
         '最新收盘价': latest_close,
@@ -81,4 +81,5 @@ plt.savefig(f"stocks.png")
 plt.clf()
 
 # Save the stock prices data to a CSV file
+stock_values = pd.DataFrame(stock_values_list)
 stock_values.to_csv('stock_values.csv', index=False)
