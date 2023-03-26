@@ -65,7 +65,7 @@ for i, code in enumerate(unique_codes):
         '证券代码': code,
         '证券名称': code_name,
         '最新收盘价': latest_close,
-        '跳楼度(越低越好)': round(latest_close/lowest_close_3m*0.5+latest_close/lowest_close_6m*0.25+latest_close/lowest_close_12m*0.125+latest_close/lowest_close_24m*0.125, 4),
+        '跳楼度(越低越好)': round(latest_close/lowest_close_3m*0.5+latest_close/lowest_close_6m*0.25+latest_close/lowest_close_12m*0.125+latest_close/lowest_close_24m*0.125, 2),
         '近3m最低价': lowest_close_3m,
         '近3m最低价日期': date_3m,
         '近6m最低价': lowest_close_6m,
@@ -77,7 +77,7 @@ for i, code in enumerate(unique_codes):
     })
     
 # Save the plot
-plt.savefig(f"stocks.png")
+plt.savefig(f"stock_plots.png")
 
 # Clear the plot
 plt.clf()

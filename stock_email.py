@@ -22,9 +22,9 @@ def send_email():
     smtp_port = email_config['smtp_port']
 
     # attach the image to the message
-    with open("stocks.png", 'rb') as f:
+    with open("stock_plots.png", 'rb') as f:
         img_data = f.read()
-    image = MIMEImage(img_data, name="stocks.png")
+    image = MIMEImage(img_data, name="stock_plots.png")
     image.add_header('Content-ID', '<image1>')
     msg.attach(image)
 
@@ -36,7 +36,7 @@ def send_email():
       <head>
         <style> 
             table, th, td {{ border: 1px solid black; border-collapse: collapse; }}
-            th, td {{ padding: 5px; }}
+            th, td {{ padding: 0px; }}
         </style>
       </head>
       <body>
