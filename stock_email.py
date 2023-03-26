@@ -41,12 +41,7 @@ def send_email():
       <body>
         <p>Hi!</P>
         <p>Sent on: {}</p>
-        <table>
-            <thead>
-                <tr>
-                    {}
-                </tr>
-            </thead>
+        <table style="border-collapse: collapse;">
             <tbody>
                 {}
             </tbody>
@@ -54,7 +49,7 @@ def send_email():
         <img src="cid:image1">
       </body>
     </html>
-    """.format(today, column_names_html, stock_values.to_html(index=False))
+    """.format(today, stock_values.to_html(index=False, border=1))
     body = MIMEText(html, 'html')
     msg.attach(body)
 
