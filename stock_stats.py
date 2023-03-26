@@ -1,3 +1,6 @@
+import os
+os.chdir('/home/project/stocker')
+
 import pymysql
 import pandas as pd
 import matplotlib.pyplot as plt

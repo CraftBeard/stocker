@@ -1,3 +1,6 @@
+import os
+os.chdir('/home/project/stocker')
+
 import baostock as bs
 import pandas as pd
 import pymysql
