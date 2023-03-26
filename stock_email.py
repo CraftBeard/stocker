@@ -27,12 +27,6 @@ def send_email():
     image.add_header('Content-ID', '<image1>')
     # msg.attach(image)
 
-    # attach the csv file to the message
-    with open("stocks_data.csv", 'rb') as f:
-        csv_data = f.read()
-    csv = MIMEApplication(csv_data, name="stocks_data.csv")
-    msg.attach(csv)
-
     # add html email body
     today = datetime.date.today().strftime("%Y-%m-%d")
     with open("stock_values.csv", 'r') as f:
