@@ -34,7 +34,7 @@ def send_email():
     html = """
     <html>
       <head>
-        <style>
+        <style type="text/css">
             table, th, td {
               border: 1px solid black;
               border-collapse: collapse;
