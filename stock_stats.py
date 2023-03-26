@@ -55,10 +55,10 @@ for i, code in enumerate(unique_codes):
     date_12m = max(date_values[close_values == lowest_close_12m])
     lowest_close_24m = min(close_values)
     date_24m = max(date_values[close_values == lowest_close_24m])
-    axs[i].annotate(f"3m lowest: {lowest_close_3m} ({date_3m})", xy=(date_3m, lowest_close_3m), xytext=(-10,-10), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='orange', fontproperties=font)
-    axs[i].annotate(f"6m lowest: {lowest_close_6m} ({date_6m})", xy=(date_6m, lowest_close_6m), xytext=(10,10), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='pink', fontproperties=font)
-    axs[i].annotate(f"12m lowest: {lowest_close_12m} ({date_12m})", xy=(date_12m, lowest_close_12m), xytext=(20,20), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='cyan', fontproperties=font)
-    axs[i].annotate(f"24m lowest: {lowest_close_24m} ({date_24m})", xy=(date_24m, lowest_close_24m), xytext=(-20,-20), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='purple', fontproperties=font)
+    axs[i].annotate(f"3m lowest: {lowest_close_3m} ({date_3m})", xy=(date_3m, lowest_close_3m), xytext=(15,13), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='orange', fontproperties=font)
+    axs[i].annotate(f"6m lowest: {lowest_close_6m} ({date_6m})", xy=(date_6m, lowest_close_6m), xytext=(10,-5), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='pink', fontproperties=font)
+    axs[i].annotate(f"12m lowest: {lowest_close_12m} ({date_12m})", xy=(date_12m, lowest_close_12m), xytext=(-10,7), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='cyan', fontproperties=font)
+    axs[i].annotate(f"24m lowest: {lowest_close_24m} ({date_24m})", xy=(date_24m, lowest_close_24m), xytext=(-15,10), textcoords='offset points', arrowprops=dict(facecolor='blue', arrowstyle='->'), fontsize=8, color='purple', fontproperties=font)
     fig.tight_layout()
 
     stock_values_list.append({
