@@ -11,7 +11,7 @@ DB_CONFIG = {
 EMAIL_CONFIG = {
     'from' : '515205935@qq.com',
     'to' : ['lianglx.alex@gmail.com'],
-    'subject' : 'Stock Data',
+    'subject' : '[Auto] Stock Data',
     'password' : 'qlgfqeimqrjrbheb',
     'smtp_server': 'smtp.qq.com',
     'smtp_port': '465'

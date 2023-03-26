@@ -2,18 +2,16 @@ import baostock as bs
 import pymysql
 import sys
 import datetime
+import stock_config as sc
+
+db_config = sc.DB_CONFIG
 
 if len(sys.argv) > 1:
     input_day = sys.argv[1]
 else:
     input_day = datetime.datetime.today().strftime('%Y-%m-%d')
 
-cnx = pymysql.connect(
-  host="localhost",
-  user="stocker",
-  password="2016@uq$tencent",
-  database="stock"
-)
+cnx = pymysql.connect(host=db_config['host'], user=db_config['user'], password=db_config['password'], database=db_config['database'])
 
 cursor = cnx.cursor()
 cursor.execute("""
