@@ -5,7 +5,7 @@ DB_CONFIG = {
     'user': 'stocker',
     'password': '2016@uq$tencent',
     'host': 'localhost',
-    'database': 'stock'
+    'database': 'stocker'
 }
 
 EMAIL_CONFIG = {
