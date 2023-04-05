@@ -8,6 +8,7 @@ db_config = sc.DB_CONFIG
 import Ashare
 import pymysql
 import datetime
+import pandas as pd
 
 
 def stock_prices_realtime(stocks, freq='1m', cnt=7):
@@ -21,9 +22,11 @@ def stock_prices_realtime(stocks, freq='1m', cnt=7):
     stock_datas = []
     for stock in stocks:
         stock_data = Ashare.get_price(stock,frequency=freq,count=cnt)
-        stock_data['stock'] = stock
+        stock_data['code'] = stock
         stock_datas.append(stock_data)
-    return pd.concat(stock_datas)
+    out_df = pd.concat(stock_datas).reset_index()
+    out_df = out_df.rename(columns={out_df.columns[0]:'dt'})
+    return out_df
 
 
 def insert_dataframe_to_mysql(dataframe, table_name, db_config):
@@ -42,20 +45,21 @@ def insert_dataframe_to_mysql(dataframe, table_name, db_config):
         create_table = """
         CREATE TABLE IF NOT EXISTS {} (
             {} DATETIME, 
-            {} VARCHAR(20), 
+            {} VARCHAR(20),
             {} FLOAT, 
             {} FLOAT, 
             {} FLOAT, 
             {} FLOAT,
+            {} FLOAT,
             PRIMARY KEY (dt, code)
         )
-        """.format('stock_prices_realtime', 'dt', 'code', 'open', 'high', 'low', 'volume')
+        """.format(table_name, 'dt', 'code', 'open', 'close', 'high', 'low', 'volume')
         cursor.execute(create_table)
         dataframe_columns = list(dataframe)
         columns = ",".join(dataframe_columns)
         values = "VALUES({})".format(",".join(["%s" for _ in dataframe_columns]))
         insert_sql = "INSERT INTO {} ({}) {}".format(table_name, columns, values)
-        on_duplicate_key_update = " ON DUPLICATE KEY UPDATE " + ", ".join([f"{col} = VALUES({col})" for col in dataframe_columns[2:]])         
+        on_duplicate_key_update = " ON DUPLICATE KEY UPDATE " + ", ".join([f"{col} = VALUES({col})" for col in dataframe_columns[1:]])         
         insert_sql += on_duplicate_key_update
         records = dataframe.to_records(index=False)
         insert_records = [tuple(record) for record in records]
@@ -74,4 +78,4 @@ def insert_dataframe_to_mysql(dataframe, table_name, db_config):
 now = datetime.datetime.now()
 if now.weekday() < 5 and now.minute%5==1:
     stock_data = stock_prices_realtime(stocks)
-    insert_dataframe_to_mysql(stock_data, 'stock_prices', db_config)
+    insert_dataframe_to_mysql(stock_data, 'stock_prices_1min', db_config)
