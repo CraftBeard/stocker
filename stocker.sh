@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "----- start -----" >> /home/project/stocker/log.txt
-source /home/project/stocker/stocker_env/bin/activate
 echo `date` "|" stock_meta.py >> /home/project/stocker/log.txt | /home/project/stocker/stocker_env/bin/python /home/project/stocker/stock_meta.py
 echo `date` "|" stock_prices.py `date +%Y-%m-%d` `date +%Y-%m-%d` >> /home/project/stocker/log.txt | /home/project/stocker/stocker_env/bin/python /home/project/stocker/stock_prices.py `date +%Y-%m-%d` `date +%Y-%m-%d`
 echo `date` "|" stock_prices_1min.py >> /home/project/stocker/log.txt | /home/project/stocker/stocker_env/bin/python /home/project/stocker/stock_prices_1min.py
