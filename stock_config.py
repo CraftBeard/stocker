@@ -9,7 +9,7 @@ DB_CONFIG = {
 }
 
 EMAIL_CONFIG = {
-    'from' : "515205935@qq.com"
+    'from' : "515205935@qq.com",
     'to' : ['lianglx.alex@gmail.com'],
     'subject' : '[Auto] Stock Data',
     'password' : "qlgfqeimqrjrbheb",
