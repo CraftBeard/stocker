@@ -41,3 +41,17 @@ Mon Mar 27 19:29:28 CST 2023 | stock_prices.py 2023-03-27 2023-03-27
 Mon Mar 27 19:29:34 CST 2023 | stock_stats.py
 Mon Mar 27 19:29:40 CST 2023 | stock_email.py
 ----- end -----
+Thu Apr 6 23:06:16 CST 2023 | stock_prices_1min.py
+----- end - minute -----
+Thu Apr 6 23:07:31 CST 2023 | stock_prices_1min.py
+----- end - minute -----
+Thu Apr 6 23:09:32 CST 2023 | stock_prices_1min.py
+----- end - minute -----
+Thu Apr 6 23:10:01 CST 2023 | stock_prices_1min.py
+----- end - minute -----
+Thu Apr 6 23:14:15 CST 2023 | stock_prices_1min.py
+----- end - minute -----
+Thu Apr 6 23:15:01 CST 2023 | stock_prices_1min.py
+----- end - minute -----
+Thu Apr 6 23:20:01 CST 2023 | stock_prices_1min.py
+----- end - minute -----
