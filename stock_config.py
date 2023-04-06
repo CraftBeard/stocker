@@ -2,19 +2,19 @@
 import os
 
 DB_CONFIG = {
-    'user': os.getenv('STOCKER_MYSQL_USER'),
-    'password': os.getenv('STOCKER_MYSQL_PASS'),
-    'host': os.getenv('STOCKER_MYSQL_HOST'),
-    'database': os.getenv('STOCKER_MYSQL_DB'),
+    'user': "stocker",
+    'password': "2016@uq$tencent",
+    'host': "localhost",
+    'database': "stocker",
 }
 
 EMAIL_CONFIG = {
-    'from' : os.getenv('EMAIL_USER'),
+    'from' : "515205935@qq.com"
     'to' : ['lianglx.alex@gmail.com'],
     'subject' : '[Auto] Stock Data',
-    'password' : os.getenv('EMAIL_PASS'),
-    'smtp_server': os.getenv('EMAIL_SMTP'),
-    'smtp_port': os.getenv('EMAIL_SMTP_PORT')
+    'password' : "qlgfqeimqrjrbheb",
+    'smtp_server': "smtp.qq.com",
+    'smtp_port': "465"
 }
 
 STOCK_CONFIG = {
