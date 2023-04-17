@@ -76,7 +76,7 @@ def insert_dataframe_to_mysql(dataframe, table_name, db_config):
 
 
 now = datetime.datetime.now()
-if now.weekday() < 5 and now.minute%5==1 and (now.time() >= datetime.time(9, 30)) and (now.time() <= datetime.time(15, 5)):
+if now.weekday() < 5 and now.minute%5==0 and (now.time() >= datetime.time(9, 30)) and (now.time() <= datetime.time(15, 5)):
     stock_data = stock_prices_realtime(stocks)
     insert_dataframe_to_mysql(stock_data, 'stock_prices_1min', db_config)
 elif now.weekday() < 5 and now.time() >= datetime.time(23, 0) and now.time() < datetime.time(23, 5):
