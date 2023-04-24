@@ -153,7 +153,7 @@ for index, row in df_codes.iterrows():
                 type,
                 abstract,
                 chgpctup,
-                chgpctdwn,
+                chgpctdwn
             )
             VALUES (%s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE
