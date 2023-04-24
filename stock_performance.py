@@ -55,8 +55,6 @@ df_codes = pd.read_sql_query("SELECT * FROM stock_codes", cnx)
 df_list = []
 for index, row in df_codes.iterrows():
 
-    if index>10: break
-
     code = row['code']
     name = row['code_name']
 
@@ -64,7 +62,7 @@ for index, row in df_codes.iterrows():
 
     rs = bs.query_performance_express_report(code, start_date="2015-01-01", end_date="2023-12-31")
 
-    prin(len(rs))
+    print(len(rs))
     
     result_list = []
     while (rs.error_code == '0') & rs.next():
