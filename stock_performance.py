@@ -143,7 +143,7 @@ for index, row in df_codes.iterrows():
         
         # Execute the UPSERT statement for the current row
         cursor.execute("""
-            INSERT INTO stock_performance (
+            INSERT INTO stock_forcast (
                 code,
                 exppubdate,
                 expstatdate,
