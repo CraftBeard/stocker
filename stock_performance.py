@@ -7,8 +7,10 @@ import pymysql
 import sys
 import datetime
 import stock_config as sc
+import time
 
 db_config = sc.DB_CONFIG
+QPS = 10
 
 cnx = pymysql.connect(host=db_config['host'], user=db_config['user'], password=db_config['password'], database=db_config['database'])
 
@@ -167,6 +169,7 @@ for index, row in df_codes.iterrows():
             ressopyoy
         ))
 
+    time.sleep(QPS/60)
 cnx.commit()
 cnx.close()
 
