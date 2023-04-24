@@ -16,31 +16,30 @@ cursor = cnx.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS stock_performance (
         code varchar(50) comment '证券代码',
-        performanceexppubdate date comment '业绩快报披露日',
-        performanceexpstatdate date comment '业绩快报统计日期',
-        performanceexpupdatedate date comment '业绩快报披露日(最新)',
-        performanceexpresstotalasset decimal(20,2) comment '业绩快报总资产',
-        performanceexpressnetasset decimal(20,2) comment '业绩快报净资产',
-        performanceexpressepschgpct decimal(20,10) comment '业绩每股收益增长率',
-        performanceexpressroewa decimal(20,10) comment '业绩快报净资产收益率ROE-加权',
-        performanceexpressepsdiluted decimal(20,10) comment '业绩快报每股收益EPS-摊薄',
-        performanceexpressgryoy decimal(20,10) comment '业绩快报营业总收入同比',
-        performanceexpressopyoy decimal(20,10) comment '业绩快报营业利润同比',
-        PRIMARY KEY (code, performanceexpstatdate)
+        pubdate date comment '业绩快报披露日',
+        statdate date comment '业绩快报统计日期',
+        updatedate date comment '业绩快报披露日(最新)',
+        resstotalasset decimal(20,2) comment '业绩快报总资产',
+        ressnetasset decimal(20,2) comment '业绩快报净资产',
+        ressepschgpct decimal(20,10) comment '业绩每股收益增长率',
+        ressroewa decimal(20,10) comment '业绩快报净资产收益率ROE-加权',
+        ressepsdiluted decimal(20,10) comment '业绩快报每股收益EPS-摊薄',
+        ressgryoy decimal(20,10) comment '业绩快报营业总收入同比',
+        ressopyoy decimal(20,10) comment '业绩快报营业利润同比',
+        PRIMARY KEY (code, statdate)
     )
 """)
 
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS stock_forcast (
         code varchar(50) comment '证券代码',
-        profitforcastexppubdate date comment '业绩预告发布日期',
-        profitforcastexpstatdate date comment '业绩预告统计日期',
-        profitforcasttype varchar(20) comment '业绩预告类型',
-        profitforcastabstract varchar(2333) comment '业绩预告摘要',
-
-        profitforcastchgpctup decimal(20,10) comment '预告归属于母公司的净利润增长上限(%)',
-        profitforcastchgpctdwn decimal(20,10) comment '预告归属于母公司的净利润增长下限(%)',
-        PRIMARY KEY (code, profitforcastexpstatdate)
+        exppubdate date comment '业绩预告发布日期',
+        expstatdate date comment '业绩预告统计日期',
+        type varchar(20) comment '业绩预告类型',
+        abstract varchar(2333) comment '业绩预告摘要',
+        chgpctup decimal(20,10) comment '预告归属于母公司的净利润增长上限(%)',
+        chgpctdwn decimal(20,10) comment '预告归属于母公司的净利润增长下限(%)',
+        PRIMARY KEY (code, expstatdate)
     )
 """)
 
@@ -61,7 +60,11 @@ for index, row in df_codes.iterrows():
     code = row['code']
     name = row['code_name']
 
+    print(code, name)
+
     rs = bs.query_performance_express_report(code, start_date="2015-01-01", end_date="2023-12-31")
+
+    prin(len(rs))
     
     result_list = []
     while (rs.error_code == '0') & rs.next():
@@ -70,56 +73,55 @@ for index, row in df_codes.iterrows():
 
     for row in result_list:
         code = row[0]
-        performanceexppubdate = row[1]
-        performanceexpstatdate = row[2]
-        performanceexpupdatedate = row[3]
-        performanceexpresstotalasset = row[4]
-        performanceexpressnetasset = row[5]
-        performanceexpressepschgpct = row[6]
-        performanceexpressroewa = row[7]
-        performanceexpressepsdiluted = row[8]
-        performanceexpressgryoy = row[9]
-        performanceexpressopyoy = row[10]
+        pubdate = row[1]
+        statdate = row[2]
+        updatedate = row[3]
+        resstotalasset = row[4]
+        ressnetasset = row[5]
+        ressepschgpct = row[6]
+        ressroewa = row[7]
+        ressepsdiluted = row[8]
+        ressgryoy = row[9]
+        ressopyoy = row[10]
         
         # Execute the UPSERT statement for the current row
         cursor.execute("""
             INSERT INTO stock_performance (
                 code,
-                performanceexppubdate,
-                performanceexpstatdate,
-                performanceexpupdatedate,
-                performanceexpresstotalasset,
-                performanceexpressnetasset,
-                performanceexpressepschgpct,
-                performanceexpressroewa,
-                performanceexpressepsdiluted,
-                performanceexpressgryoy,
-                performanceexpressopyoy
+                pubdate,
+                statdate,
+                updatedate,
+                resstotalasset,
+                ressnetasset,
+                ressepschgpct,
+                ressroewa,
+                ressepsdiluted,
+                ressgryoy,
+                ressopyoy
             )
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE
-                performanceexppubdate = VALUES(performanceexppubdate),
-                performanceexpstatdate = VALUES(performanceexpstatdate),
-                performanceexpupdatedate = VALUES(performanceexpupdatedate),
-                performanceexpresstotalasset = VALUES(performanceexpresstotalasset),
-                performanceexpressnetasset = VALUES(performanceexpressnetasset),
-                performanceexpressepschgpct = VALUES(performanceexpressepschgpct),
-                performanceexpressroewa = VALUES(performanceexpressroewa),
-                performanceexpressepsdiluted = VALUES(performanceexpressepsdiluted),
-                performanceexpressgryoy = VALUES(performanceexpressgryoy),
-                performanceexpressopyoy = VALUES(performanceexpressopyoy)
+                pubdate = VALUES(pubdate),
+                updatedate = VALUES(updatedate),
+                resstotalasset = VALUES(resstotalasset),
+                ressnetasset = VALUES(ressnetasset),
+                ressepschgpct = VALUES(ressepschgpct),
+                ressroewa = VALUES(ressroewa),
+                ressepsdiluted = VALUES(ressepsdiluted),
+                ressgryoy = VALUES(ressgryoy),
+                ressopyoy = VALUES(ressopyoy)
         """, (
             code,
-            performanceexppubdate,
-            performanceexpstatdate,
-            performanceexpupdatedate,
-            performanceexpresstotalasset,
-            performanceexpressnetasset,
-            performanceexpressepschgpct,
-            performanceexpressroewa,
-            performanceexpressepsdiluted,
-            performanceexpressgryoy,
-            performanceexpressopyoy
+            pubdate,
+            statdate,
+            updatedate,
+            resstotalasset,
+            ressnetasset,
+            ressepschgpct,
+            ressroewa,
+            ressepsdiluted,
+            ressgryoy,
+            ressopyoy
         ))
 
     rs_forecast = bs.query_forecast_report(code, start_date="2010-01-01", end_date="2023-12-31")
@@ -136,22 +138,34 @@ for index, row in df_codes.iterrows():
         
         # Execute the UPSERT statement for the current row
         cursor.execute("""
-            INSERT INTO stock_forecast (
+            INSERT INTO stock_performance (
                 code,
-                forecastdate,
-                forecasttype,
-                forecastvalue
+                exppubdate,
+                expstatdate,
+                type,
+                abstract,
+                chgpctup,
+                chgpctdwn,
             )
-            VALUES (%s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE
-                forecastdate = VALUES(forecastdate),
-                forecasttype = VALUES(forecasttype),
-                forecastvalue = VALUES(forecastvalue)
+                exppubdate = VALUES(exppubdate),
+                type = VALUES(type),
+                abstract = VALUES(abstract),
+                chgpctup = VALUES(chgpctup),
+                chgpctdwn = VALUES(chgpctdwn)
         """, (
             code,
-            forecastdate,
-            forecasttype,
-            forecastvalue
+            pubdate,
+            statdate,
+            updatedate,
+            resstotalasset,
+            ressnetasset,
+            ressepschgpct,
+            ressroewa,
+            ressepsdiluted,
+            ressgryoy,
+            ressopyoy
         ))
 
 cnx.commit()
