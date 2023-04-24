@@ -52,7 +52,7 @@ print('login respond error_code:'+lg.error_code)
 print('login respond  error_msg:'+lg.error_msg)
 
 #### 获取公司业绩快报 ####
-df_codes = pd.read_sql_query("SELECT * FROM stock_codes WHERE LOWER(code) LIKE 'sh%' OR code LIKE 'sz%'", cnx)
+df_codes = pd.read_sql_query("SELECT * FROM stock_codes WHERE LOWER(code) LIKE 'sh.600%' OR code LIKE 'sh.601%' OR code LIKE 'sz.000%'", cnx)
 
 df_list = []
 for index, row in df_codes.iterrows():
