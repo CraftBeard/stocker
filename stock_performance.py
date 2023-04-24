@@ -26,8 +26,6 @@ cursor.execute("""
         performanceexpressepsdiluted decimal(20,10) comment '业绩快报每股收益EPS-摊薄',
         performanceexpressgryoy decimal(20,10) comment '业绩快报营业总收入同比',
         performanceexpressopyoy decimal(20,10) comment '业绩快报营业利润同比',
-        performanceexpressgryoy decimal(20,10) comment '业绩快报营业总收入同比',
-        performanceexpressopyoy decimal(20,10) comment '业绩快报营业利润同比',
         PRIMARY KEY (code, performanceexpstatdate)
     )
 """)
