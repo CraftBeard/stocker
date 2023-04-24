@@ -123,6 +123,7 @@ for index, row in df_codes.iterrows():
             ressgryoy,
             ressopyoy
         ))
+    cnx.commit()
 
     rs_forecast = bs.query_forecast_report(code, start_date="2010-01-01", end_date="2023-12-31")
     rs_forecast_list = []
@@ -167,9 +168,10 @@ for index, row in df_codes.iterrows():
             chgpctup,
             chgpctdwn
         ))
+    cnx.commit()
 
     time.sleep(QPS/60)
-cnx.commit()
+    
 cnx.close()
 
 #### 登出系统 ####
