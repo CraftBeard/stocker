@@ -133,9 +133,12 @@ for index, row in df_codes.iterrows():
 
     for row in rs_forecast_list:
         code = row[0]
-        forecastdate = row[1]
-        forecasttype = row[2]
-        forecastvalue = row[3]
+        exppubdate = row[1]
+        expstatdate = row[2]
+        type = row[3]
+        abstract = row[4]
+        chgpctup = row[5]
+        chgpctdwn = row[6]
         
         # Execute the UPSERT statement for the current row
         cursor.execute("""
@@ -157,16 +160,12 @@ for index, row in df_codes.iterrows():
                 chgpctdwn = VALUES(chgpctdwn)
         """, (
             code,
-            pubdate,
-            statdate,
-            updatedate,
-            resstotalasset,
-            ressnetasset,
-            ressepschgpct,
-            ressroewa,
-            ressepsdiluted,
-            ressgryoy,
-            ressopyoy
+            exppubdate,
+            expstatdate,
+            type,
+            abstract,
+            chgpctup,
+            chgpctdwn
         ))
 
     time.sleep(QPS/60)
