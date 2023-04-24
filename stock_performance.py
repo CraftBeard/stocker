@@ -62,7 +62,8 @@ for index, row in df_codes.iterrows():
 
     print(code, name)
 
-    rs = bs.query_performance_express_report(code, start_date="2015-01-01", end_date="2023-12-31")
+    #rs = bs.query_performance_express_report(code, start_date="2015-01-01", end_date="2023-12-31")
+    rs = bs.query_performance_express_report(code, start_date=sys.argv[1], end_date=sys.argv[2])
     
     result_list = []
     while (rs.error_code == '0') & rs.next():
@@ -126,7 +127,8 @@ for index, row in df_codes.iterrows():
         ))
     cnx.commit()
 
-    rs_forecast = bs.query_forecast_report(code, start_date="2010-01-01", end_date="2023-12-31")
+    #rs_forecast = bs.query_forecast_report(code, start_date="2010-01-01", end_date="2023-12-31")
+    rs_forecast = bs.query_forecast_report(code, start_date=sys.argv[1], end_date=sys.argv[2])
     rs_forecast_list = []
     while (rs_forecast.error_code == '0') & rs_forecast.next():
         # 分页查询，将每页信息合并在一起
