@@ -125,6 +125,7 @@ for index, row in df_codes.iterrows():
         ))
 
     rs_forecast = bs.query_forecast_report(code, start_date="2010-01-01", end_date="2023-12-31")
+    print(len(rs_forecast))
     rs_forecast_list = []
     while (rs_forecast.error_code == '0') & rs_forecast.next():
         # 分页查询，将每页信息合并在一起
