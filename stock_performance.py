@@ -61,13 +61,13 @@ for index, row in df_codes.iterrows():
     print(code, name)
 
     rs = bs.query_performance_express_report(code, start_date="2015-01-01", end_date="2023-12-31")
-
-    print(len(rs))
     
     result_list = []
     while (rs.error_code == '0') & rs.next():
         # 获取一条记录，将记录合并在一起
         result_list.append(rs.get_row_data())
+
+    print(len(result_list))
 
     for row in result_list:
         code = row[0]
@@ -123,11 +123,11 @@ for index, row in df_codes.iterrows():
         ))
 
     rs_forecast = bs.query_forecast_report(code, start_date="2010-01-01", end_date="2023-12-31")
-    print(len(rs_forecast))
     rs_forecast_list = []
     while (rs_forecast.error_code == '0') & rs_forecast.next():
         # 分页查询，将每页信息合并在一起
         rs_forecast_list.append(rs_forecast.get_row_data())
+    print(len(rs_forecast_list))
 
     for row in rs_forecast_list:
         code = row[0]
