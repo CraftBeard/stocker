@@ -59,7 +59,7 @@ for index, row in df_codes.iterrows():
     if index>10: break
 
     code = row['code']
-    name = row['name']
+    name = row['code_name']
 
     rs = bs.query_performance_express_report(code, start_date="2015-01-01", end_date="2023-12-31")
     
