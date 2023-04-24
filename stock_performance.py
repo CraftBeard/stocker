@@ -72,18 +72,18 @@ for index, row in df_codes.iterrows():
     print(len(result_list))
 
     for row in result_list:
-        code = row[0]
-        pubdate = row[1]
-        statdate = row[2]
-        updatedate = row[3]
-        resstotalasset = row[4]
-        ressnetasset = row[5]
-        ressepschgpct = row[6]
-        ressroewa = row[7]
-        ressepsdiluted = row[8]
-        ressgryoy = row[9]
-        ressopyoy = row[10]
-        
+        code = row[0].strip()
+        pubdate = datetime.datetime.strptime(row[1], '%Y-%m-%d').date()
+        statdate = datetime.datetime.strptime(row[2], '%Y-%m-%d').date()
+        updatedate = datetime.datetime.strptime(row[3], '%Y-%m-%d').date()
+        resstotalasset = float(row[4])
+        ressnetasset = float(row[5])
+        ressepschgpct = float(row[6])
+        ressroewa = float(row[7])
+        ressepsdiluted = float(row[8])
+        ressgryoy = float(row[9])
+        ressopyoy = float(row[10])
+
         # Execute the UPSERT statement for the current row
         cursor.execute("""
             INSERT INTO stock_performance (
@@ -133,13 +133,13 @@ for index, row in df_codes.iterrows():
     print(len(rs_forecast_list))
 
     for row in rs_forecast_list:
-        code = row[0]
-        exppubdate = row[1]
-        expstatdate = row[2]
-        type = row[3]
-        abstract = row[4]
-        chgpctup = row[5]
-        chgpctdwn = row[6]
+        code = row[0].strip()
+        exppubdate = datetime.datetime.strptime(row[1], '%Y-%m-%d')
+        expstatdate = datetime.datetime.strptime(row[2], '%Y-%m-%d')
+        type = int(row[3])
+        abstract = row[4].strip()
+        chgpctup = float(row[5])
+        chgpctdwn = float(row[6])
         
         # Execute the UPSERT statement for the current row
         cursor.execute("""
