@@ -83,6 +83,7 @@ for index, row in df_codes.iterrows():
         ressepsdiluted = float(row[8])
         ressgryoy = float(row[9])
         ressopyoy = float(row[10])
+        print(row)
 
         # Execute the UPSERT statement for the current row
         cursor.execute("""
@@ -140,7 +141,9 @@ for index, row in df_codes.iterrows():
         abstract = row[4].strip()
         chgpctup = float(row[5])
         chgpctdwn = float(row[6])
-        
+
+        print(row)
+
         # Execute the UPSERT statement for the current row
         cursor.execute("""
             INSERT INTO stock_forcast (
