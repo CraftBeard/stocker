@@ -21,13 +21,13 @@ cursor.execute("""
         pubdate date comment '业绩快报披露日',
         statdate date comment '业绩快报统计日期',
         updatedate date comment '业绩快报披露日(最新)',
-        resstotalasset decimal(20,2) comment '业绩快报总资产',
-        ressnetasset decimal(20,2) comment '业绩快报净资产',
-        ressepschgpct decimal(20,10) comment '业绩每股收益增长率',
-        ressroewa decimal(20,10) comment '业绩快报净资产收益率ROE-加权',
-        ressepsdiluted decimal(20,10) comment '业绩快报每股收益EPS-摊薄',
-        ressgryoy decimal(20,10) comment '业绩快报营业总收入同比',
-        ressopyoy decimal(20,10) comment '业绩快报营业利润同比',
+        resstotalasset float comment '业绩快报总资产',
+        ressnetasset float comment '业绩快报净资产',
+        ressepschgpct float comment '业绩每股收益增长率',
+        ressroewa float comment '业绩快报净资产收益率ROE-加权',
+        ressepsdiluted float comment '业绩快报每股收益EPS-摊薄',
+        ressgryoy float comment '业绩快报营业总收入同比',
+        ressopyoy float comment '业绩快报营业利润同比',
         PRIMARY KEY (code, statdate)
     )
 """)
@@ -39,8 +39,8 @@ cursor.execute("""
         expstatdate date comment '业绩预告统计日期',
         type varchar(20) comment '业绩预告类型',
         abstract varchar(2333) comment '业绩预告摘要',
-        chgpctup decimal(20,10) comment '预告归属于母公司的净利润增长上限(%)',
-        chgpctdwn decimal(20,10) comment '预告归属于母公司的净利润增长下限(%)',
+        chgpctup float comment '预告归属于母公司的净利润增长上限(%)',
+        chgpctdwn float comment '预告归属于母公司的净利润增长下限(%)',
         PRIMARY KEY (code, expstatdate)
     )
 """)
@@ -136,7 +136,7 @@ for index, row in df_codes.iterrows():
         code = row[0].strip()
         exppubdate = datetime.datetime.strptime(row[1], '%Y-%m-%d')
         expstatdate = datetime.datetime.strptime(row[2], '%Y-%m-%d')
-        type = int(row[3])
+        type = row[3].strip()
         abstract = row[4].strip()
         chgpctup = float(row[5])
         chgpctdwn = float(row[6])
