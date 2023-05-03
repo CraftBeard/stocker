@@ -10,7 +10,7 @@ import stock_config as sc
 import time
 
 db_config = sc.DB_CONFIG
-QPS = 10
+QPS = 30
 
 cnx = pymysql.connect(host=db_config['host'], user=db_config['user'], password=db_config['password'], database=db_config['database'])
 
