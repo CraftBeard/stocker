@@ -228,14 +228,14 @@ df_perform_sh = pd.DataFrame(stock_perform_sh['json']['records'])
 print('SH - {}'.format(df_perform_sh.shape))
 try:
     upsert_performance(df_perform_sh)
-catch Exception as e:
+except Exception as e:
     print(e)
 stock_perform_sz = stock_performance(params={'rdate': REPORT_DATE.replace('-',''), 'market': '012002'})
 df_perform_sz = pd.DataFrame(stock_perform_sz['json']['records'])
 print('SZ - {}'.format(df_perform_sz.shape))
 try:
     upsert_performance(df_perform_sz)
-catch Exception as e:
+except Exception as e:
     print(e)
 print('业绩报告下载成功...')
 
@@ -246,6 +246,6 @@ df_forcast = pd.DataFrame(stock_forcast['json']['data']['records'])
 print(df_forcast.shape)
 try:
     upsert_forcast(df_forcast)
-catch Exception as e:
+except Exception as e:
     print(e)
 print('业绩预告下载成功...')
