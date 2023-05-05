@@ -226,11 +226,11 @@ print('业绩报告下载中...')
 stock_perform_sh = stock_performance(params={'report_date': REPORT_DATE.replace('-',''), 'market': '012001'})
 df_perform_sh = pd.DataFrame(stock_perform_sh['json']['records'])
 upsert_performance(df_perform_sh)
-print('SH')
+print('SH - {}'.format(df_perform_sh.shape))
 stock_perform_sz = stock_performance(params={'report_date': REPORT_DATE.replace('-',''), 'market': '012002'})
 df_perform_sz = pd.DataFrame(stock_perform_sz['json']['records'])
 upsert_performance(df_perform_sz)
-print('SZ')
+print('SZ - {}'.format(df_perform_sz.shape))
 print('业绩报告下载成功...')
 
 # 业绩预告
