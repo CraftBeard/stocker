@@ -14,7 +14,7 @@ db_config = sc.DB_CONFIG
 REPORT_DATE = sys.argv[1]
 
 # market 012001=沪市 012002=深市
-def stock_performance(url = 'http://webapi.cninfo.com.cn/api/sysapi/p_sysapi1041', params={'report_date': '20230331', 'market': '012001'}):
+def stock_performance(url = 'http://webapi.cninfo.com.cn/api/sysapi/p_sysapi1041', params={'rdate': '20230331', 'market': '012001'}):
     random_time_str = str(int(time.time()))
     js_code = py_mini_racer.MiniRacer()
     js_str = """
@@ -223,11 +223,11 @@ def upsert_forcast(df):
 # 业绩报告
 print('报告日期：{}'.format(REPORT_DATE))
 print('业绩报告下载中...')
-stock_perform_sh = stock_performance(params={'report_date': REPORT_DATE.replace('-',''), 'market': '012001'})
+stock_perform_sh = stock_performance(params={'rdate': REPORT_DATE.replace('-',''), 'market': '012001'})
 df_perform_sh = pd.DataFrame(stock_perform_sh['json']['records'])
 upsert_performance(df_perform_sh)
 print('SH - {}'.format(df_perform_sh.shape))
-stock_perform_sz = stock_performance(params={'report_date': REPORT_DATE.replace('-',''), 'market': '012002'})
+stock_perform_sz = stock_performance(params={'rdate': REPORT_DATE.replace('-',''), 'market': '012002'})
 df_perform_sz = pd.DataFrame(stock_perform_sz['json']['records'])
 upsert_performance(df_perform_sz)
 print('SZ - {}'.format(df_perform_sz.shape))
