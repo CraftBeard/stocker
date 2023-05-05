@@ -226,11 +226,17 @@ print('业绩报告下载中...')
 stock_perform_sh = stock_performance(params={'rdate': REPORT_DATE.replace('-',''), 'market': '012001'})
 df_perform_sh = pd.DataFrame(stock_perform_sh['json']['records'])
 print('SH - {}'.format(df_perform_sh.shape))
-upsert_performance(df_perform_sh)
+try:
+    upsert_performance(df_perform_sh)
+catch Exception as e:
+    print(e)
 stock_perform_sz = stock_performance(params={'rdate': REPORT_DATE.replace('-',''), 'market': '012002'})
 df_perform_sz = pd.DataFrame(stock_perform_sz['json']['records'])
 print('SZ - {}'.format(df_perform_sz.shape))
-upsert_performance(df_perform_sz)
+try:
+    upsert_performance(df_perform_sz)
+catch Exception as e:
+    print(e)
 print('业绩报告下载成功...')
 
 # 业绩预告
@@ -238,5 +244,8 @@ print('业绩预告下载中...')
 stock_forcast = stock_forcast(url='http://www.cninfo.com.cn/data20/performanceForecast/list?rdate={}'.format(REPORT_DATE.replace('-','')))
 df_forcast = pd.DataFrame(stock_forcast['json']['data']['records'])
 print(df_forcast.shape)
-upsert_forcast(df_forcast)
+try:
+    upsert_forcast(df_forcast)
+catch Exception as e:
+    print(e)
 print('业绩预告下载成功...')
