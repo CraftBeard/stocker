@@ -1,5 +1,6 @@
 import pandas as pd
 import stock_config as sc
+import pymysql
 
 db_config = sc.DB_CONFIG
 
