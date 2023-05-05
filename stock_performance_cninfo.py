@@ -221,14 +221,21 @@ def upsert_forcast(df):
     return "Succeed"
 
 # 业绩报告
+print('报告日期：{}'.format(REPORT_DATE))
+print('业绩报告下载中...')
 stock_perform_sh = stock_performance(params={'report_date': REPORT_DATE.replace('-',''), 'market': '012001'})
 df_perform_sh = pd.DataFrame(stock_perform_sh['json']['records'])
 upsert_performance(df_perform_sh)
+print('SH')
 stock_perform_sz = stock_performance(params={'report_date': REPORT_DATE.replace('-',''), 'market': '012002'})
 df_perform_sz = pd.DataFrame(stock_perform_sz['json']['records'])
 upsert_performance(df_perform_sz)
+print('SZ')
+print('业绩报告下载成功...')
 
 # 业绩预告
+print('业绩预告下载中...')
 stock_forcast = stock_forcast(url='http://www.cninfo.com.cn/data20/performanceForecast/list?rdate={}'.format(REPORT_DATE.replace('-','')))
 df_forcast = pd.DataFrame(stock_forcast['json']['data']['records'])
 upsert_forcast(df_forcast)
+print('业绩预告下载成功...')
